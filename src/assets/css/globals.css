@@ -1,0 +1,24 @@
+@import "tailwindcss";
+@custom-variant sm (@media (min-width: 744px));
+@custom-variant md (@media (min-width: 1133px));
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+/* 只提升 .tw-high 里面的 tailwind 优先级 */
+.tw-high :is([class*='w-'],[class*='h-'],[class*='absolute'],[class*='relative'],[class*='bottom-'],[class*='right-'],[class*='flex']) {
+  all: revert-layer !important;
+}

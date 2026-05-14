@@ -3,7 +3,7 @@ import axios, {
     type AxiosResponse,
     type InternalAxiosRequestConfig,
 } from "axios";
-import { deleteStorage, getStorage } from "@/core/publicFn";
+import {deleteStorage, getStorage} from "@/core/publicFn";
 
 // 扩展 axios 类型
 declare module "axios" {
@@ -29,7 +29,7 @@ service.interceptors.request.use(
         appendHeader(config);
 
         if (config.isLocationHref) {
-            window.location.href = `${process.env.NEXT_PUBLIC_API_URL}${config.url}`;
+            window.location.href = `${import.meta.env.NEXT_PUBLIC_API_URL}${config.url}`;
             return config;
         }
 
@@ -62,11 +62,12 @@ service.interceptors.response.use(
 
 const appendHeader = (config: CustomRequestConfig) => {
     const token = getStorage<string | null>("token");
-    const locale = getStorage<string | null>("locale");
+    const locale = getStorage<string | null>("lang");
 
     if (!config.whiteApi) {
         config.headers["Token"] = token ?? null;
     }
     config.headers["Locale"] = locale ?? "EN";
     config.headers["Domain"] = 'http://dianpu1.biajikit.com';
+    config.headers['Menu-Id'] = import.meta.env.VITE_PUBLIC_MENU_ID
 };

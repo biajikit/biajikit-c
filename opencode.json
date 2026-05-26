@@ -15,8 +15,8 @@
         "gemini-3.1-flash-lite": {
           "name": "$GEMINI_MODEL",
           "limit": {
-            "context": 256000,
-            "output": 4096
+            "context": 524288,
+            "output": 32768
           },
           "modalities": {
             "input": [

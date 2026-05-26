@@ -1,14 +1,9 @@
-import React, {useEffect} from 'react';
-import {getExample} from "@/utils/api/shopRecommendCard";
-import {AxiosResponse} from "axios";
+import {useEffect} from 'react';
+import Img from '@/components/Img';
+// import {getExample} from "@/utils/api/shopRecommendCard";
+// import {AxiosResponse} from "axios";
 
-interface CardProps {
-    title?: string;
-}
-
-export default function Index({
-                                  title = ''
-                              }: CardProps) {
+export default function Index() {
     useEffect(() => {
         // const init = async () => {
         //     const xx: AxiosResponse = await getExample({})
@@ -25,7 +20,7 @@ export default function Index({
 
                     {/* 图片容器 */}
                     <div className="w-full h-[135px] sm:h-[150px] relative">
-                        <img
+                        <Img
                             src="https://s3.menukit.ai/font/img_home_hero.png"
                             className="w-full h-full object-cover rounded-[14px]"
                             alt=""
@@ -49,7 +44,7 @@ export default function Index({
                             </div>
                             {/* 加号 */}
                             <div className="flex items-center justify-center w-[30px] h-[30px] rounded-full bg-white/60 backdrop-blur-[3px] cursor-pointer">
-                                <i className="iconfont icon-a-Union2 text-black text-[12px]"></i>
+                                <i className="iconfont icon-icon_add text-black text-[14px]"></i>
                             </div>
                         </div>
                     </div>

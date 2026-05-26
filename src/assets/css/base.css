@@ -1,6 +1,6 @@
 @font-face {
     font-family: PingFangSC;
-    src: url("../font/PINGFANG BOLD_0.TTF")
+    src: url("https://biajikit-test.oss-ap-southeast-1.aliyuncs.com/assets/font/PINGFANG BOLD_0.TTF")
 }
 
 * {
@@ -11,7 +11,7 @@
     font-family: PingFangSC;
 }
 
-body {
+body,html {
     background: var(--background);
     color: var(--foreground);
 }
@@ -49,9 +49,15 @@ body {
 }
 
 @layer utilities {
-    .pop-down { animation: pop-down-animation 0.3s ease-in; }
-    .pop-up   { animation: pop-up-animation 0.3s ease-in; }
-    .pop-right{ animation: pop-right-animation 0.3s ease-in; }
+    .pop-down { animation: pop-down-animation 0.2s ease-in; }
+    .pop-up   { animation: pop-up-animation 0.2s ease-in; }
+    .pop-right{ animation: pop-right-animation 0.2s ease-in; }
+}
+
+@media (min-width: 1133px) {
+    [class*="md:pop-right"] {
+        animation: pop-right-animation 0.2s ease-in!important;
+    }
 }
 
 

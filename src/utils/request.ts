@@ -29,7 +29,7 @@ service.interceptors.request.use(
         appendHeader(config);
 
         if (config.isLocationHref) {
-            window.location.href = `${import.meta.env.NEXT_PUBLIC_API_URL}${config.url}`;
+            window.location.href = `${import.meta.env.VITE_PUBLIC_API_URL}${config.url}`;
             return config;
         }
 

@@ -3,11 +3,14 @@ import {useLanguage} from "@/assets/dict/language.tsx";
 import {languageKeyList} from "@/assets/dict/pageLanguage";
 import {useDialog} from "@/hooks/dialogConfig";
 import ShopCart from '@/components/ShopCart/index'
-import {getHeaderConfig} from "@/utils/api/publicHeader";
-import {AxiosResponse} from "axios";
+import Img from '@/components/Img';
+import {useShopConfig} from "@/hooks/shopConfigMsg.ts";
+import {generateFingerprint} from '@/core/publicFn.ts'
 
 export default function Index({}) {
-
+    // 生成浏览器指纹
+    const {getBrowserFingerPrint} = generateFingerprint()
+    getBrowserFingerPrint()
     const {t, setLang, lang, abbreviation} = useLanguage() // 语言设置
     const {showDialog, setDialog} = useDialog(); // 弹框设置
     const menuDom = useRef<HTMLDivElement>(null); // 导航菜单元素
@@ -35,12 +38,17 @@ export default function Index({}) {
         };
     }, []);
 
+    const {shopConfig} = useShopConfig(); //店铺信息
+
     return (
         <div className="">
+            {/*头部占位*/}
             <div className="h-[56px]"></div>
+
+            {/*头部*/}
             <div
                 className="h-[56px] flex justify-between items-center p-[0_16px] fixed left-0 top-0 z-10 w-full bg-[rgba(255,255,255,1)]">
-                <img src="https://s3.menukit.ai/font/img_home_hero.png" alt=""
+                <Img src={shopConfig?.logo_img} alt=""
                      className="h-[36px] flex-none mr-[16px]"/>
                 <div className="flex items-center justify-end w-full">
                     {/*导航菜单*/}
@@ -68,6 +76,20 @@ export default function Index({}) {
                             className="font-[500] text-[14px] m-[0_4px] text-[rgba(255,255,255,1)]">{abbreviation}</div>
                         <i className="iconfont icon-icon_arrow_down text-[12px]  text-[rgba(255,255,255,1)]"></i>
                     </button>
+                </div>
+            </div>
+
+            {/*店铺信息*/}
+            <div className="relative">
+                <Img src={shopConfig?.banner_img} alt=""
+                     className="h-[240px] sm:h-[329px] w-full block"/>
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-1">
+                    <div className="font-[500] text-[16px] text-[rgba(255,255,255,1)] mb-[10px] text-center">
+                        {shopConfig?.menu_name}
+                    </div>
+                    <div className="font-[400] text-[12px] text-[rgba(255,255,255,1)]">
+                        {shopConfig?.menu_description}
+                    </div>
                 </div>
             </div>
 

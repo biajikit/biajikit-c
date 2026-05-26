@@ -1,12 +1,13 @@
-import { getStorage, setStorage } from "@/core/publicFn";
-import { languageKeyList } from '@/assets/dict/pageLanguage.ts'
-import { useState, useEffect } from 'react'
+import {getStorage, setStorage} from "@/core/publicFn";
+import {languageKeyList} from '@/assets/dict/pageLanguage.ts'
+import {useState, useEffect} from 'react'
 import React from 'react';
+
 const languageList: Record<string, Record<string, string>> = {
     "nav.cart": {
         "EN": "Cart",
-        "简": "购物车",
-        "繁": "購物車",
+        "ZH-CN": "购物车",
+        "ZH-TW": "購物車",
         "JA": "カート",
         "TH": "ตะกร้า",
         "FR": "Panier",
@@ -16,8 +17,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "nav.language": {
         "EN": "Language",
-        "简": "语言",
-        "繁": "語言",
+        "ZH-CN": "语言",
+        "ZH-TW": "語言",
         "JA": "言語",
         "TH": "ภาษา",
         "FR": "Langue",
@@ -27,8 +28,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "nav.secondary.menu": {
         "EN": "Menu",
-        "简": "点单",
-        "繁": "點餐",
+        "ZH-CN": "点单",
+        "ZH-TW": "點餐",
         "JA": "メニュー",
         "TH": "เมนู",
         "FR": "Menu",
@@ -38,8 +39,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "nav.secondary.visitUs": {
         "EN": "Visit us",
-        "简": "到店",
-        "繁": "到店",
+        "ZH-CN": "到店",
+        "ZH-TW": "到店",
         "JA": "店舗情報",
         "TH": "ข้อมูลร้าน",
         "FR": "Nous trouver",
@@ -49,8 +50,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "store.service.dineIn": {
         "EN": "Dine-in",
-        "简": "堂食",
-        "繁": "堂食",
+        "ZH-CN": "堂食",
+        "ZH-TW": "堂食",
         "JA": "店内飲食",
         "TH": "ทานที่ร้าน",
         "FR": "Sur place",
@@ -60,8 +61,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "store.service.takeaway": {
         "EN": "Takeaway",
-        "简": "自取",
-        "繁": "自取",
+        "ZH-CN": "自取",
+        "ZH-TW": "自取",
         "JA": "テイクアウト",
         "TH": "รับกลับ",
         "FR": "À emporter",
@@ -71,8 +72,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "store.service.delivery": {
         "EN": "Delivery",
-        "简": "外送",
-        "繁": "外送",
+        "ZH-CN": "外送",
+        "ZH-TW": "外送",
         "JA": "デリバリー",
         "TH": "จัดส่ง",
         "FR": "Livraison",
@@ -82,8 +83,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "store.service.driveThru": {
         "EN": "Drive-thru",
-        "简": "免下车取餐",
-        "繁": "免下車取餐",
+        "ZH-CN": "免下车取餐",
+        "ZH-TW": "免下車取餐",
         "JA": "ドライブスルー",
         "TH": "ไดรฟ์ทรู",
         "FR": "Drive",
@@ -93,8 +94,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "store.parking.free": {
         "EN": "Free parking",
-        "简": "免费停车",
-        "繁": "免費停車",
+        "ZH-CN": "免费停车",
+        "ZH-TW": "免費停車",
         "JA": "無料駐車場",
         "TH": "ที่จอดรถฟรี",
         "FR": "Parking gratuit",
@@ -104,8 +105,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "store.parking.paid": {
         "EN": "Paid parking",
-        "简": "付费停车",
-        "繁": "付費停車",
+        "ZH-CN": "付费停车",
+        "ZH-TW": "付費停車",
         "JA": "有料駐車場",
         "TH": "ที่จอดรถแบบเสียเงิน",
         "FR": "Parking payant",
@@ -115,8 +116,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "store.payment.cash": {
         "EN": "Cash",
-        "简": "现金",
-        "繁": "現金",
+        "ZH-CN": "现金",
+        "ZH-TW": "現金",
         "JA": "現金",
         "TH": "เงินสด",
         "FR": "Espèces",
@@ -126,8 +127,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "store.payment.creditCard": {
         "EN": "Credit card",
-        "简": "信用卡",
-        "繁": "信用卡",
+        "ZH-CN": "信用卡",
+        "ZH-TW": "信用卡",
         "JA": "クレジットカード",
         "TH": "บัตรเครดิต",
         "FR": "Carte de crédit",
@@ -137,8 +138,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "store.payment.debitCard": {
         "EN": "Debit card",
-        "简": "借记卡",
-        "繁": "簽帳金融卡",
+        "ZH-CN": "借记卡",
+        "ZH-TW": "簽帳金融卡",
         "JA": "デビットカード",
         "TH": "บัตรเดบิต",
         "FR": "Carte de débit",
@@ -148,8 +149,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "store.payment.applePay": {
         "EN": "Apple Pay",
-        "简": "Apple Pay",
-        "繁": "Apple Pay",
+        "ZH-CN": "Apple Pay",
+        "ZH-TW": "Apple Pay",
         "JA": "Apple Pay",
         "TH": "Apple Pay",
         "FR": "Apple Pay",
@@ -159,8 +160,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "store.payment.googlePay": {
         "EN": "Google Pay",
-        "简": "Google Pay",
-        "繁": "Google Pay",
+        "ZH-CN": "Google Pay",
+        "ZH-TW": "Google Pay",
         "JA": "Google Pay",
         "TH": "Google Pay",
         "FR": "Google Pay",
@@ -170,8 +171,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "store.payment.paypal": {
         "EN": "PayPal",
-        "简": "PayPal",
-        "繁": "PayPal",
+        "ZH-CN": "PayPal",
+        "ZH-TW": "PayPal",
         "JA": "PayPal",
         "TH": "PayPal",
         "FR": "PayPal",
@@ -181,8 +182,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "store.payment.alipay": {
         "EN": "Alipay",
-        "简": "支付宝",
-        "繁": "支付寶",
+        "ZH-CN": "支付宝",
+        "ZH-TW": "支付寶",
         "JA": "Alipay",
         "TH": "Alipay",
         "FR": "Alipay",
@@ -192,8 +193,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "store.payment.weChatPay": {
         "EN": "WeChat Pay",
-        "简": "微信支付",
-        "繁": "微信支付",
+        "ZH-CN": "微信支付",
+        "ZH-TW": "微信支付",
         "JA": "WeChat Pay",
         "TH": "WeChat Pay",
         "FR": "WeChat Pay",
@@ -203,8 +204,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "store.payment.unionPay": {
         "EN": "UnionPay",
-        "简": "银联",
-        "繁": "銀聯",
+        "ZH-CN": "银联",
+        "ZH-TW": "銀聯",
         "JA": "UnionPay",
         "TH": "UnionPay",
         "FR": "UnionPay",
@@ -214,8 +215,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "store.payment.octopus": {
         "EN": "Octopus",
-        "简": "八达通",
-        "繁": "八達通",
+        "ZH-CN": "八达通",
+        "ZH-TW": "八達通",
         "JA": "Octopus",
         "TH": "Octopus",
         "FR": "Octopus",
@@ -225,8 +226,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "store.payment.payMe": {
         "EN": "PayMe by HSBC",
-        "简": "PayMe by HSBC",
-        "繁": "PayMe by HSBC",
+        "ZH-CN": "PayMe by HSBC",
+        "ZH-TW": "PayMe by HSBC",
         "JA": "PayMe by HSBC",
         "TH": "PayMe by HSBC",
         "FR": "PayMe by HSBC",
@@ -236,8 +237,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "store.payment.payPay": {
         "EN": "PayPay",
-        "简": "PayPay",
-        "繁": "PayPay",
+        "ZH-CN": "PayPay",
+        "ZH-TW": "PayPay",
         "JA": "PayPay",
         "TH": "PayPay",
         "FR": "PayPay",
@@ -247,8 +248,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "store.payment.suica": {
         "EN": "Suica",
-        "简": "Suica",
-        "繁": "Suica",
+        "ZH-CN": "Suica",
+        "ZH-TW": "Suica",
         "JA": "Suica",
         "TH": "Suica",
         "FR": "Suica",
@@ -258,8 +259,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "store.payment.pasmo": {
         "EN": "PASMO",
-        "简": "PASMO",
-        "繁": "PASMO",
+        "ZH-CN": "PASMO",
+        "ZH-TW": "PASMO",
         "JA": "PASMO",
         "TH": "PASMO",
         "FR": "PASMO",
@@ -269,8 +270,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "store.payment.rakutenPay": {
         "EN": "Rakuten Pay",
-        "简": "Rakuten Pay",
-        "繁": "Rakuten Pay",
+        "ZH-CN": "Rakuten Pay",
+        "ZH-TW": "Rakuten Pay",
         "JA": "Rakuten Pay",
         "TH": "Rakuten Pay",
         "FR": "Rakuten Pay",
@@ -280,8 +281,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "store.payment.dBarai": {
         "EN": "d払い",
-        "简": "d払い",
-        "繁": "d払い",
+        "ZH-CN": "d払い",
+        "ZH-TW": "d払い",
         "JA": "d払い",
         "TH": "d払い",
         "FR": "d払い",
@@ -291,8 +292,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "store.payment.jcb": {
         "EN": "JCB",
-        "简": "JCB",
-        "繁": "JCB",
+        "ZH-CN": "JCB",
+        "ZH-TW": "JCB",
         "JA": "JCB",
         "TH": "JCB",
         "FR": "JCB",
@@ -302,8 +303,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "store.payment.payNow": {
         "EN": "PayNow",
-        "简": "PayNow",
-        "繁": "PayNow",
+        "ZH-CN": "PayNow",
+        "ZH-TW": "PayNow",
         "JA": "PayNow",
         "TH": "PayNow",
         "FR": "PayNow",
@@ -313,8 +314,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "store.payment.payLah": {
         "EN": "PayLah!",
-        "简": "PayLah!",
-        "繁": "PayLah!",
+        "ZH-CN": "PayLah!",
+        "ZH-TW": "PayLah!",
         "JA": "PayLah!",
         "TH": "PayLah!",
         "FR": "PayLah!",
@@ -324,8 +325,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "store.payment.grabPay": {
         "EN": "GrabPay",
-        "简": "GrabPay",
-        "繁": "GrabPay",
+        "ZH-CN": "GrabPay",
+        "ZH-TW": "GrabPay",
         "JA": "GrabPay",
         "TH": "GrabPay",
         "FR": "GrabPay",
@@ -335,8 +336,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "store.payment.promptPay": {
         "EN": "PromptPay",
-        "简": "PromptPay",
-        "繁": "PromptPay",
+        "ZH-CN": "PromptPay",
+        "ZH-TW": "PromptPay",
         "JA": "PromptPay",
         "TH": "PromptPay",
         "FR": "PromptPay",
@@ -346,8 +347,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "store.payment.trueMoneyWallet": {
         "EN": "TrueMoney Wallet",
-        "简": "TrueMoney Wallet",
-        "繁": "TrueMoney Wallet",
+        "ZH-CN": "TrueMoney Wallet",
+        "ZH-TW": "TrueMoney Wallet",
         "JA": "TrueMoney Wallet",
         "TH": "TrueMoney Wallet",
         "FR": "TrueMoney Wallet",
@@ -357,8 +358,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "store.payment.venmo": {
         "EN": "Venmo",
-        "简": "Venmo",
-        "繁": "Venmo",
+        "ZH-CN": "Venmo",
+        "ZH-TW": "Venmo",
         "JA": "Venmo",
         "TH": "Venmo",
         "FR": "Venmo",
@@ -368,8 +369,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "store.payment.cashApp": {
         "EN": "Cash App",
-        "简": "Cash App",
-        "繁": "Cash App",
+        "ZH-CN": "Cash App",
+        "ZH-TW": "Cash App",
         "JA": "Cash App",
         "TH": "Cash App",
         "FR": "Cash App",
@@ -379,8 +380,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "store.payment.bancontact": {
         "EN": "Bancontact",
-        "简": "Bancontact",
-        "繁": "Bancontact",
+        "ZH-CN": "Bancontact",
+        "ZH-TW": "Bancontact",
         "JA": "Bancontact",
         "TH": "Bancontact",
         "FR": "Bancontact",
@@ -390,8 +391,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "store.payment.blik": {
         "EN": "BLIK",
-        "简": "BLIK",
-        "繁": "BLIK",
+        "ZH-CN": "BLIK",
+        "ZH-TW": "BLIK",
         "JA": "BLIK",
         "TH": "BLIK",
         "FR": "BLIK",
@@ -401,8 +402,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "store.payment.mbWay": {
         "EN": "MB Way",
-        "简": "MB Way",
-        "繁": "MB Way",
+        "ZH-CN": "MB Way",
+        "ZH-TW": "MB Way",
         "JA": "MB Way",
         "TH": "MB Way",
         "FR": "MB Way",
@@ -412,8 +413,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "store.payment.multibanco": {
         "EN": "Multibanco",
-        "简": "Multibanco",
-        "繁": "Multibanco",
+        "ZH-CN": "Multibanco",
+        "ZH-TW": "Multibanco",
         "JA": "Multibanco",
         "TH": "Multibanco",
         "FR": "Multibanco",
@@ -423,8 +424,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "store.payment.mobilePay": {
         "EN": "MobilePay",
-        "简": "MobilePay",
-        "繁": "MobilePay",
+        "ZH-CN": "MobilePay",
+        "ZH-TW": "MobilePay",
         "JA": "MobilePay",
         "TH": "MobilePay",
         "FR": "MobilePay",
@@ -434,8 +435,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "store.payment.twint": {
         "EN": "TWINT",
-        "简": "TWINT",
-        "繁": "TWINT",
+        "ZH-CN": "TWINT",
+        "ZH-TW": "TWINT",
         "JA": "TWINT",
         "TH": "TWINT",
         "FR": "TWINT",
@@ -445,8 +446,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "store.payment.vipps": {
         "EN": "Vipps",
-        "简": "Vipps",
-        "繁": "Vipps",
+        "ZH-CN": "Vipps",
+        "ZH-TW": "Vipps",
         "JA": "Vipps",
         "TH": "Vipps",
         "FR": "Vipps",
@@ -456,8 +457,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "footer.social.facebook": {
         "EN": "Facebook",
-        "简": "Facebook",
-        "繁": "Facebook",
+        "ZH-CN": "Facebook",
+        "ZH-TW": "Facebook",
         "JA": "Facebook",
         "TH": "Facebook",
         "FR": "Facebook",
@@ -467,8 +468,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "footer.social.instagram": {
         "EN": "Instagram",
-        "简": "Instagram",
-        "繁": "Instagram",
+        "ZH-CN": "Instagram",
+        "ZH-TW": "Instagram",
         "JA": "Instagram",
         "TH": "Instagram",
         "FR": "Instagram",
@@ -478,8 +479,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "footer.social.youtube": {
         "EN": "YouTube",
-        "简": "YouTube",
-        "繁": "YouTube",
+        "ZH-CN": "YouTube",
+        "ZH-TW": "YouTube",
         "JA": "YouTube",
         "TH": "YouTube",
         "FR": "YouTube",
@@ -489,8 +490,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "footer.social.tiktok": {
         "EN": "TikTok",
-        "简": "TikTok",
-        "繁": "TikTok",
+        "ZH-CN": "TikTok",
+        "ZH-TW": "TikTok",
         "JA": "TikTok",
         "TH": "TikTok",
         "FR": "TikTok",
@@ -500,8 +501,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "footer.social.x": {
         "EN": "X",
-        "简": "X",
-        "繁": "X",
+        "ZH-CN": "X",
+        "ZH-TW": "X",
         "JA": "X",
         "TH": "X",
         "FR": "X",
@@ -511,8 +512,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "footer.social.xiaohongshu": {
         "EN": "Xiaohongshu",
-        "简": "小红书",
-        "繁": "小紅書",
+        "ZH-CN": "小红书",
+        "ZH-TW": "小紅書",
         "JA": "Xiaohongshu",
         "TH": "Xiaohongshu",
         "FR": "Xiaohongshu",
@@ -521,9 +522,9 @@ const languageList: Record<string, Record<string, string>> = {
         "IT": "Xiaohongshu"
     },
     "footer.social.douyin": {
-        "EN": "d",
-        "简": "抖音",
-        "繁": "抖音",
+        "EN": "Douyin",
+        "ZH-CN": "抖音",
+        "ZH-TW": "抖音",
         "JA": "Douyin",
         "TH": "Douyin",
         "FR": "Douyin",
@@ -533,8 +534,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "footer.social.whatsapp": {
         "EN": "WhatsApp",
-        "简": "WhatsApp",
-        "繁": "WhatsApp",
+        "ZH-CN": "WhatsApp",
+        "ZH-TW": "WhatsApp",
         "JA": "WhatsApp",
         "TH": "WhatsApp",
         "FR": "WhatsApp",
@@ -544,8 +545,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "footer.copyright": {
         "EN": "© {year} {storeName}",
-        "简": "© {year} {storeName}",
-        "繁": "© {year} {storeName}",
+        "ZH-CN": "© {year} {storeName}",
+        "ZH-TW": "© {year} {storeName}",
         "JA": "© {year} {storeName}",
         "TH": "© {year} {storeName}",
         "FR": "© {year} {storeName}",
@@ -555,8 +556,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "footer.poweredBy": {
         "EN": "Powered by {BiajiKit}",
-        "简": "由 {BiajiKit} 提供支持",
-        "繁": "由 {BiajiKit} 提供支援",
+        "ZH-CN": "由 {BiajiKit} 提供支持",
+        "ZH-TW": "由 {BiajiKit} 提供支援",
         "JA": "{BiajiKit} により提供",
         "TH": "ขับเคลื่อนโดย {BiajiKit}",
         "FR": "Propulsé par {BiajiKit}",
@@ -564,10 +565,32 @@ const languageList: Record<string, Record<string, string>> = {
         "ES": "Con tecnología de {BiajiKit}",
         "IT": "Realizzato con {BiajiKit}"
     },
+    "cart.floating.viewCart": {
+        "EN": "View cart",
+        "ZH-CN": "查看购物车",
+        "ZH-TW": "查看購物車",
+        "JA": "カートを見る",
+        "TH": "ดูตะกร้า",
+        "FR": "Voir le panier",
+        "DE": "Warenkorb anzeigen",
+        "ES": "Ver carrito",
+        "IT": "Vedi carrello"
+    },
+    "cart.floating.yourOrder": {
+        "EN": "Your order",
+        "ZH-CN": "你的订单",
+        "ZH-TW": "你的訂單",
+        "JA": "ご注文",
+        "TH": "คำสั่งซื้อของคุณ",
+        "FR": "Votre commande",
+        "DE": "Ihre Bestellung",
+        "ES": "Tu pedido",
+        "IT": "Il tuo ordine"
+    },
     "cart.tableNumber": {
         "EN": "Table number",
-        "简": "桌号",
-        "繁": "桌號",
+        "ZH-CN": "桌号",
+        "ZH-TW": "桌號",
         "JA": "テーブル番号",
         "TH": "หมายเลขโต๊ะ",
         "FR": "Numéro de table",
@@ -577,8 +600,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "cart.note": {
         "EN": "Note",
-        "简": "备注",
-        "繁": "備註",
+        "ZH-CN": "备注",
+        "ZH-TW": "備註",
         "JA": "備考",
         "TH": "หมายเหตุ",
         "FR": "Remarque",
@@ -588,8 +611,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "cart.specialRequests": {
         "EN": "Any allergies or special requests?",
-        "简": "有过敏或特殊要求吗？",
-        "繁": "有過敏或特殊要求嗎？",
+        "ZH-CN": "有过敏或特殊要求吗？",
+        "ZH-TW": "有過敏或特殊要求嗎？",
         "JA": "アレルギーやご要望はありますか？",
         "TH": "มีอาการแพ้หรือคำขอพิเศษไหม？",
         "FR": "Avez-vous des allergies ou des demandes particulières ?",
@@ -599,8 +622,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "cart.subtotal": {
         "EN": "Subtotal",
-        "简": "小计",
-        "繁": "小計",
+        "ZH-CN": "小计",
+        "ZH-TW": "小計",
         "JA": "小計",
         "TH": "ยอดรวมย่อย",
         "FR": "Sous-total",
@@ -610,8 +633,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "cart.discount": {
         "EN": "Discount",
-        "简": "优惠",
-        "繁": "優惠",
+        "ZH-CN": "优惠",
+        "ZH-TW": "優惠",
         "JA": "割引",
         "TH": "ส่วนลด",
         "FR": "Remise",
@@ -621,8 +644,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "cart.total": {
         "EN": "Total",
-        "简": "总计",
-        "繁": "總計",
+        "ZH-CN": "总计",
+        "ZH-TW": "總計",
         "JA": "合計",
         "TH": "ยอดรวม",
         "FR": "Total",
@@ -632,8 +655,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "cart.placeOrder": {
         "EN": "Place order",
-        "简": "下单",
-        "繁": "下單",
+        "ZH-CN": "下单",
+        "ZH-TW": "下單",
         "JA": "注文する",
         "TH": "สั่งซื้อ",
         "FR": "Passer commande",
@@ -641,10 +664,32 @@ const languageList: Record<string, Record<string, string>> = {
         "ES": "Realizar pedido",
         "IT": "Invia ordine"
     },
+    "cart.empty.title": {
+        "EN": "No items yet",
+        "ZH-CN": "还没有添加商品",
+        "ZH-TW": "還沒有加入商品",
+        "JA": "まだ商品がありません",
+        "TH": "ยังไม่มีรายการ",
+        "FR": "Votre panier est vide",
+        "DE": "Noch keine Artikel",
+        "ES": "Todavía no hay artículos",
+        "IT": "Non hai ancora aggiunto articoli"
+    },
+    "cart.empty.orderNow": {
+        "EN": "Order now",
+        "ZH-CN": "去点单",
+        "ZH-TW": "去點餐",
+        "JA": "注文する",
+        "TH": "สั่งเลย",
+        "FR": "Commander",
+        "DE": "Bestellen",
+        "ES": "Pedir ahora",
+        "IT": "Ordina ora"
+    },
     "order.sending": {
         "EN": "Sending order…",
-        "简": "正在提交订单…",
-        "繁": "正在送出訂單…",
+        "ZH-CN": "正在提交订单…",
+        "ZH-TW": "正在送出訂單…",
         "JA": "注文を送信中…",
         "TH": "กำลังส่งคำสั่งซื้อ…",
         "FR": "Envoi de la commande…",
@@ -654,8 +699,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "order.placed": {
         "EN": "Order placed",
-        "简": "下单成功",
-        "繁": "下單成功",
+        "ZH-CN": "下单成功",
+        "ZH-TW": "下單成功",
         "JA": "注文が完了しました",
         "TH": "สั่งซื้อสำเร็จ",
         "FR": "Commande passée",
@@ -665,8 +710,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "order.number": {
         "EN": "Order #",
-        "简": "订单号",
-        "繁": "訂單號碼",
+        "ZH-CN": "订单号",
+        "ZH-TW": "訂單號碼",
         "JA": "注文番号",
         "TH": "หมายเลขคำสั่งซื้อ",
         "FR": "N° de commande",
@@ -676,8 +721,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "order.table": {
         "EN": "Table",
-        "简": "桌号",
-        "繁": "桌號",
+        "ZH-CN": "桌号",
+        "ZH-TW": "桌號",
         "JA": "テーブル",
         "TH": "โต๊ะ",
         "FR": "Table",
@@ -687,8 +732,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "order.total": {
         "EN": "Total",
-        "简": "总计",
-        "繁": "總計",
+        "ZH-CN": "总计",
+        "ZH-TW": "總計",
         "JA": "合計",
         "TH": "ยอดรวม",
         "FR": "Total",
@@ -698,8 +743,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "order.placedAt": {
         "EN": "Placed at",
-        "简": "下单时间",
-        "繁": "下單時間",
+        "ZH-CN": "下单时间",
+        "ZH-TW": "下單時間",
         "JA": "注文日時",
         "TH": "เวลาที่สั่ง",
         "FR": "Passée à",
@@ -709,8 +754,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "order.sentToRestaurant": {
         "EN": "Your order has been sent to the restaurant.",
-        "简": "订单已发送至餐厅。",
-        "繁": "訂單已送出至餐廳。",
+        "ZH-CN": "订单已发送至餐厅。",
+        "ZH-TW": "訂單已送出至餐廳。",
         "JA": "ご注文は店舗に送信されました。",
         "TH": "ส่งคำสั่งซื้อของคุณไปยังร้านอาหารแล้ว",
         "FR": "Votre commande a été envoyée au restaurant.",
@@ -718,21 +763,21 @@ const languageList: Record<string, Record<string, string>> = {
         "ES": "Tu pedido se ha enviado al restaurante.",
         "IT": "Il tuo ordine è stato inviato al ristorante."
     },
-    "order.viewOrders": {
-        "EN": "View orders",
-        "简": "查看订单",
-        "繁": "查看訂單",
+    "order.viewOrder": {
+        "EN": "View order",
+        "ZH-CN": "查看订单",
+        "ZH-TW": "查看訂單",
         "JA": "注文を見る",
         "TH": "ดูคำสั่งซื้อ",
-        "FR": "Voir les commandes",
-        "DE": "Bestellungen anzeigen",
-        "ES": "Ver pedidos",
-        "IT": "Vedi ordini"
+        "FR": "Voir la commande",
+        "DE": "Bestellung anzeigen",
+        "ES": "Ver pedido",
+        "IT": "Vedi ordine"
     },
     "order.addMore": {
         "EN": "Add more",
-        "简": "继续加点",
-        "繁": "繼續加點",
+        "ZH-CN": "继续加点",
+        "ZH-TW": "繼續加點",
         "JA": "さらに追加",
         "TH": "เพิ่มรายการ",
         "FR": "Ajouter plus",
@@ -740,10 +785,21 @@ const languageList: Record<string, Record<string, string>> = {
         "ES": "Añadir más",
         "IT": "Aggiungi altro"
     },
+    "order.itemCount": {
+        "EN": "{count} items",
+        "ZH-CN": "{count} 件",
+        "ZH-TW": "{count} 件",
+        "JA": "{count} 点",
+        "TH": "{count} รายการ",
+        "FR": "{count} article(s)",
+        "DE": "{count} Artikel",
+        "ES": "{count} artículo(s)",
+        "IT": "{count} articolo/i"
+    },
     "order.placedCount": {
         "EN": "{count} order placed",
-        "简": "已提交 {count} 个订单",
-        "繁": "已提交 {count} 筆訂單",
+        "ZH-CN": "已提交 {count} 个订单",
+        "ZH-TW": "已提交 {count} 筆訂單",
         "JA": "{count} 件の注文が完了しました",
         "TH": "สั่งซื้อสำเร็จ {count} รายการ",
         "FR": "{count} commande passée",
@@ -753,8 +809,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "order.tableNumberValue": {
         "EN": "Table {tableNumber}",
-        "简": "桌号 {tableNumber}",
-        "繁": "桌號 {tableNumber}",
+        "ZH-CN": "桌号 {tableNumber}",
+        "ZH-TW": "桌號 {tableNumber}",
         "JA": "テーブル {tableNumber}",
         "TH": "โต๊ะ {tableNumber}",
         "FR": "Table {tableNumber}",
@@ -764,8 +820,8 @@ const languageList: Record<string, Record<string, string>> = {
     },
     "order.view": {
         "EN": "View",
-        "简": "查看",
-        "繁": "查看",
+        "ZH-CN": "查看",
+        "ZH-TW": "查看",
         "JA": "表示",
         "TH": "ดู",
         "FR": "Voir",
@@ -773,17 +829,6 @@ const languageList: Record<string, Record<string, string>> = {
         "ES": "Ver",
         "IT": "Visualizza"
     },
-    "order.orderMore": {
-        "EN": "Order more",
-        "简": "继续加点",
-        "繁": "繼續加點",
-        "JA": "さらに注文",
-        "TH": "สั่งเพิ่ม",
-        "FR": "Commander plus",
-        "DE": "Mehr bestellen",
-        "ES": "Pedir más",
-        "IT": "Ordina altro"
-    }
 }
 
 // 语言类型
@@ -831,7 +876,8 @@ export function useLanguage() {
         params?: Record<string, string | React.ReactNode>
     ): React.ReactNode => {
         const entry = languageList[key] ?? {};
-        const text = entry[currentLangInfo.abbreviation] ?? '';
+        const text = entry[currentLang] ?? ((
+            <span className="m-[0_4px] font-[400] text-[20px] text-[red] cursor-pointer">{key}</span>));
 
         if (!params) return text;
 
@@ -850,7 +896,7 @@ export function useLanguage() {
 
             // 用 React.createElement 代替 JSX
             parts.push(
-                React.createElement(React.Fragment, { key: start }, params[paramKey] ?? fullMatch)
+                React.createElement(React.Fragment, {key: start}, params[paramKey] ?? fullMatch)
             );
 
             lastIndex = regex.lastIndex;
@@ -868,6 +914,7 @@ export function useLanguage() {
         lang: currentLangInfo.key,
         abbreviation: currentLangInfo.abbreviation,
         langName: currentLangInfo.name,
+        info: currentLangInfo,
         setLang,
     };
 }

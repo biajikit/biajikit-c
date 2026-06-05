@@ -20,6 +20,12 @@ export interface ShopInfo {
     store_id: number // 店铺id
     pub_time: string; // 提交年份
     currency: string // 店铺货币
+    lang_config: string[] // 店铺语言配置
+    first_lang: string // 店铺主语言
+    addr: {
+        link: string
+        name: string
+    }[] // 店铺地址
 }
 
 // 社交平台单个项

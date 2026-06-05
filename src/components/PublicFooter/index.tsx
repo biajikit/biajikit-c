@@ -17,11 +17,15 @@ export default function Index() {
                     {shopConfig?.menu_name}
                 </div>}
 
-            {/*店铺描述*/}
-            {shopConfig?.menu_description &&
-                <div
-                    className="mt-[8px] text-[14px] text-[rgba(51,51,51,1)] font-[500] line-clamp-2 p-[0_40px] sm:p-[0_25px]">
-                    {shopConfig?.menu_description}
+            {/*店铺地址*/}
+            {shopConfig?.addr && shopConfig?.addr[0]?.name &&
+                <div onClick={() => {
+                    if (shopConfig?.addr[0] && shopConfig?.addr[0]?.link) {
+                        window.open(shopConfig?.addr[0]?.link);
+                    }
+                }}
+                     className={`mt-[8px] text-[14px] text-[rgba(51,51,51,1)] font-[500] line-clamp-2 p-[0_40px] sm:p-[0_25px] ${shopConfig?.addr[0] && shopConfig?.addr[0]?.link&&'cursor-pointer'}`}>
+                    {shopConfig?.addr[0]?.name}
                 </div>}
 
             {/*电话/邮箱*/}

@@ -1,17 +1,25 @@
 import {useState, useEffect} from 'react';
 import {getShopConfig} from '@/utils/api/shopConfig.ts';
 import {ShopInfo} from '@/type/shop.ts';
+import {getStorage} from "@/core/publicFn.ts";
+import {languageKeyList} from "@/assets/dict/pageLanguage.ts";
+import {useLanguage} from "@/assets/dict/language.tsx";
 
 let cachedData: ShopInfo = {} as ShopInfo;
 let fetchPromise: Promise<ShopInfo> | null = null;
 
-// 订阅器：支持多组件同步更新
 let subscribers: (() => void)[] = [];
+let listeners: (() => void)[] = [];
+
+function notifyListeners() {
+    listeners.forEach(listener => listener());
+}
 
 export function useShopConfig() {
     const [, forceUpdate] = useState({});
+    const {lang} = useLanguage();
 
-    // 订阅更新
+    // 订阅组件刷新
     useEffect(() => {
         const update = () => forceUpdate({});
         subscribers.push(update);
@@ -20,34 +28,61 @@ export function useShopConfig() {
         };
     }, []);
 
-    // 初始化请求
+    // 切换 lang 时清空缓存，强制重新请求
     useEffect(() => {
-        if (cachedData.menu_id) return;
-        if (fetchPromise) return;
+        // 切换语言时清空缓存，这样下一次执行会重新请求
+        cachedData = {} as ShopInfo;
+    }, [lang]);
 
+    // 请求逻辑（lang 变化会触发）
+    useEffect(() => {
         const fetchData = async () => {
             try {
                 fetchPromise = getShopConfig({}).then(res => res.data);
                 const result = await fetchPromise;
 
-                // 空值 / null 自动转为空数组，避免页面报错
                 result.parking = result.parking ?? [];
                 result.payment = result.payment ?? [];
                 result.payment_method = result.payment_method ?? [];
                 result.service_model = result.service_model ?? [];
                 result.social = result.social ?? [];
+                result.addr = result.addr ?? []
 
                 cachedData = result;
                 subscribers.forEach(s => s());
+
+                languageKeyList.forEach(languageKey => {
+                    languageKey.show = result.lang_config.includes(languageKey.key)
+                });
+
+                if (!getStorage('lang')) {
+                    let locale = 'EN';
+                    const localeFind = languageKeyList.find(
+                        (language) =>
+                            language.key.toLowerCase() === navigator.language.toLowerCase() &&
+                            result.lang_config.includes(language.key)
+                    );
+                    if (localeFind) locale = localeFind.key;
+                    else if (result.first_lang) locale = result.first_lang;
+
+                    const {setLang} = useLanguage();
+                    setLang(locale);
+                }
+
+                notifyListeners();
             } catch (err) {
                 console.error('获取店铺配置失败', err);
+            } finally {
+                fetchPromise = null;
             }
         };
 
-        fetchData();
-    }, []);
+        // 只要没数据，就请求（lang 切换后缓存已清空，所以会重新请求）
+        if (!cachedData.menu_id && !fetchPromise) {
+            fetchData();
+        }
+    }, [lang]); // 依赖 lang，切换就跑
 
-    // 手动修改配置
     const setShopConfig = (newData: Partial<ShopInfo>) => {
         if (!cachedData.menu_id) return;
         cachedData = {...cachedData, ...newData};
@@ -56,7 +91,7 @@ export function useShopConfig() {
 
     return {
         shopConfig: cachedData,
-        loading: !cachedData && !fetchPromise,
-        setShopConfig, // 外部可修改
+        loading: !cachedData.menu_id,
+        setShopConfig,
     };
 }

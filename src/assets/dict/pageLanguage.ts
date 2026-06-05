@@ -5,62 +5,71 @@ export const languageKeyList = [
         abbreviation: 'EN',
         key: 'EN',
         currencySymbol: '$',
-        currencyCode: 'USD'
+        currencyCode: 'USD',
+        show: false
     },
     {
         name: '简体中文',
         abbreviation: '简',
         key: 'ZH-CN',
         currencySymbol: '¥',
-        currencyCode: 'CNY'
+        currencyCode: 'CNY',
+        show: false
     },
     {
         name: '繁體中文',
         abbreviation: '繁',
         key: 'ZH-TW',
         currencySymbol: 'NT$',
-        currencyCode: 'TWD'
+        currencyCode: 'TWD',
+        show: false
     },
     {
         name: '日本語',
         abbreviation: 'JA',
         key: 'JA',
         currencySymbol: '¥',
-        currencyCode: 'JPY'
+        currencyCode: 'JPY',
+        show: false
     },
     {
         name: 'ไทย',
         abbreviation: 'TH',
         key: 'TH',
         currencySymbol: '฿',
-        currencyCode: 'THB'
+        currencyCode: 'THB',
+        show: false
     },
     {
         name: 'Français',
         abbreviation: 'FR',
         key: 'FR',
         currencySymbol: '€',
-        currencyCode: 'EUR'
+        currencyCode: 'EUR',
+        show: false
     },
     {
         name: 'Deutsch',
         abbreviation: 'DE',
         key: 'DE',
         currencySymbol: '€',
-        currencyCode: 'EUR'
+        currencyCode: 'EUR',
+        show: false
     },
     {
         name: 'Español',
         abbreviation: 'ES',
         key: 'ES',
         currencySymbol: '€',
-        currencyCode: 'EUR'
+        currencyCode: 'EUR',
+        show: false
     },
     {
         name: 'Italiano',
         abbreviation: 'IT',
         key: 'IT',
         currencySymbol: '€',
-        currencyCode: 'EUR'
+        currencyCode: 'EUR',
+        show: false
     }
 ]

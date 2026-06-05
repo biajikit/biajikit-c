@@ -34,9 +34,7 @@ export function useGoodsList() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<Error | null>(null);
 
-    // ======================
     // 暴露方法：修改商品列表里某个数据的值
-    // ======================
     const updateProductField = (
         productId: number,
         field: keyof ProductClass['list'][0],
@@ -44,7 +42,7 @@ export function useGoodsList() {
     ) => {
         if (!cachedData) return;
 
-        // 全新拷贝 → 修改 → 覆盖全局缓存
+        // 拷贝 → 修改 → 覆盖全局缓存
         const newData = cachedData.map(cls => ({
             ...cls,
             list: cls.list.map(item => ({
@@ -64,13 +62,11 @@ export function useGoodsList() {
         // 更新全局缓存
         cachedData = newData;
 
-        // 🔥 通知所有组件刷新（跨组件实时更新）
+        // 通知所有组件刷新（跨组件实时更新）
         notifyListeners();
     };
 
-    // ======================
     // 实时计算总数（跨组件实时）
-    // ======================
     const {totalCartNum, totalCartPrice, oldTotalCartPrice, totalList} = useMemo(() => {
         let totalNum: number = 0,
             totalPrice: number = 0,
@@ -104,9 +100,7 @@ export function useGoodsList() {
         });
     }
 
-    // ======================
     // 语言切换 + 数据请求
-    // ======================
     useEffect(() => {
         if (lastLang !== null && lastLang !== lang) {
             cachedData = null;
@@ -145,7 +139,7 @@ export function useGoodsList() {
                 });
 
                 cachedData = data;
-                notifyListeners(); // 🔥 关键：所有组件同步
+                notifyListeners(); // 关键：所有组件同步
             } catch (err) {
                 setError(err as Error);
             } finally {

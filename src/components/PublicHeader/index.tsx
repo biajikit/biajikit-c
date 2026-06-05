@@ -12,7 +12,9 @@ export default function Index({}) {
     const {getBrowserFingerPrint} = generateFingerprint()
     getBrowserFingerPrint()
     const {t, setLang, lang, abbreviation} = useLanguage() // 语言设置
+
     const {showDialog, setDialog} = useDialog(); // 弹框设置
+
     const menuDom = useRef<HTMLDivElement>(null); // 导航菜单元素
     const [menuState, setMenuState] = useState({
         loadingOver: false, // 是否加载完
@@ -41,7 +43,7 @@ export default function Index({}) {
     const {shopConfig} = useShopConfig(); //店铺信息
 
     return (
-        <div className="">
+        <>
             {/*头部占位*/}
             <div className="h-[56px]"></div>
 
@@ -102,7 +104,7 @@ export default function Index({}) {
                         <div className="p-[20px_26px] bg-[rgba(255,255,255,1)] max-h-[50vh] overflow-y-auto pop-down">
                             {languageKeyList.map((item: any, index) => (
                                 <div key={index}
-                                     className="h-[44px] flex items-center justify-between cursor-pointer"
+                                     className={`h-[44px] flex items-center justify-between cursor-pointer ${item.show ? '' : 'hidden'}`}
                                      onClick={() => setLang(item.key)}>
                                     <div
                                         className={`font-[500] text-[16px]  ${lang === item.key ? 'text-[rgba(51,51,51,1)]' : 'text-[rgba(153,153,153,1)]'}`}>
@@ -133,6 +135,6 @@ export default function Index({}) {
                             </div>
                         </div>}
                 </div>}
-        </div>
+        </>
     );
 }

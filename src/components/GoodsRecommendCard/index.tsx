@@ -3,7 +3,7 @@ import Img from '@/components/Img';
 import ModelTitle from "@/components/ModelTitle";
 import {useLanguage} from "@/assets/dict/language.tsx";
 import {getRecommendList} from "@/utils/api/goodsCard.ts";
-import {ProductClass} from "@/type/goods.ts";
+import {ProductClass, ProductItem} from "@/type/goods.ts";
 import {useShopConfig} from "@/hooks/shopConfigMsg.ts";
 import {useGoodsList} from "@/hooks/useGoodsList.ts";
 
@@ -28,18 +28,23 @@ export default function Index() {
     }
 
     const {updateProductField} = useGoodsList();
-    function setGoodData(id: number, key: keyof ProductClass['list'][0], value: any) {
+
+    function setGoodData<T extends keyof ProductItem>(
+        id: number,
+        key: T,
+        value: ProductItem[T]
+    ): void {
         let data: ProductClass[] = recommendDataList.map((cls: ProductClass) => ({
             ...cls,
-            list: cls.list.map(item => {
+            list: cls.list.map((item: ProductItem) => {
                 if (id === item.product_id) {
-                    item[key] = value
-                    updateProductField(id, key, value)
+                    item[key] = value;
+                    updateProductField(item.product_id, key, value);
                 }
-                return item
-            })
+                return {...item};
+            }),
         }));
-        setRecommendDataList(data)
+        setRecommendDataList(data);
     }
 
     return (
@@ -77,7 +82,8 @@ export default function Index() {
                                                 className="absolute z-1 right-[8px] bottom-[8px] flex items-center justify-between bg-white/60 backdrop-blur-[3px]">
                                                 {/* 减号 */}
                                                 {goods.cart_num > 0 &&
-                                                    <div onClick={() => setGoodData(goods.product_id, 'cart_num', goods.cart_num - 1)}
+                                                    <div
+                                                        onClick={() => setGoodData(goods.product_id, 'cart_num', goods.cart_num - 1)}
                                                         className="flex items-center justify-center w-[30px] h-[30px] rounded-full bg-white/60 backdrop-blur-[3px] cursor-pointer">
                                                         <i className="iconfont icon-icon_subtract text-black text-[14px]"></i>
                                                     </div>}

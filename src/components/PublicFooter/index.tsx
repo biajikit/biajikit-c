@@ -24,7 +24,7 @@ export default function Index() {
                         window.open(shopConfig?.addr[0]?.link);
                     }
                 }}
-                     className={`mt-[8px] text-[14px] text-[rgba(51,51,51,1)] font-[500] line-clamp-2 p-[0_40px] sm:p-[0_25px] ${shopConfig?.addr[0] && shopConfig?.addr[0]?.link&&'cursor-pointer'}`}>
+                     className={`mt-[8px] text-[14px] text-[rgba(51,51,51,1)] font-[500] line-clamp-2 p-[0_40px] sm:p-[0_25px] ${shopConfig?.addr[0] && shopConfig?.addr[0]?.link && 'cursor-pointer'}`}>
                     {shopConfig?.addr[0]?.name}
                 </div>}
 
@@ -42,14 +42,14 @@ export default function Index() {
                 </div>}
 
             {/*自定义信息/服务方式/停车信息*/}
-            {(shopConfig?.open_time || shopConfig?.service_model?.length || shopConfig?.service_model?.length) &&
+            {(shopConfig?.open_time || shopConfig?.service_model?.length > 0) &&
                 <div className="mt-[52px] p-[0_30px] text-center font-[400] text-[14px] text-[rgba(102,102,102,1)]">
 
                     {/*自定义信息*/}
                     {shopConfig?.open_time && <div className="">{shopConfig?.open_time}</div>}
 
                     {/*服务方式*/}
-                    {shopConfig?.service_model?.length &&
+                    {shopConfig?.service_model?.length > 0 &&
                         <div className="flex items-center justify-center mt-[5px]">
                             {shopConfig?.service_model?.map((item, index) => {
                                 return (
@@ -62,7 +62,7 @@ export default function Index() {
                         </div>}
 
                     {/*停车信息*/}
-                    {shopConfig?.parking?.length &&
+                    {shopConfig?.parking?.length > 0 &&
                         <div className="flex items-center justify-center mt-[5px]">
                             {shopConfig?.parking?.map((item, index) => {
                                 return (
@@ -76,7 +76,7 @@ export default function Index() {
                 </div>}
 
             {/*支付类型*/}
-            {shopConfig?.payment_method?.length &&
+            {shopConfig?.payment_method?.length > 0 &&
                 <div
                     className="mt-[56px] p-[0_30px] text-center font-[400] text-[14px] text-[rgba(102,102,102,1)] flex items-center justify-center">
                     {shopConfig.payment_method.map((item, index) => {
@@ -91,7 +91,7 @@ export default function Index() {
             }
 
             {/*支付方式*/}
-            {shopConfig?.payment?.length &&
+            {shopConfig?.payment?.length > 0 &&
                 <div
                     className="p-[0_55px] sm:p-[0_18px] mt-[8px] sm:mt-[12px] flex items-center justify-start md:justify-center flex-wrap">
                     {payList.map((item, index) => {
@@ -110,7 +110,7 @@ export default function Index() {
                 </div>}
 
             {/*媒体*/}
-            {shopConfig?.social?.length &&
+            {shopConfig?.social?.length > 0 &&
                 <div className="mt-[55px] p-[0_30px] flex items-center justify-start md:justify-center flex-wrap">
                     {shopConfig?.social?.map((item, index) => {
                         return (

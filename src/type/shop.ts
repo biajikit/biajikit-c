@@ -10,11 +10,11 @@ export interface ShopInfo {
     menu_id: number; // 菜单ID
     menu_name: string; // 菜单名称
     open_time: string; // 营业时间
-    parking: string[] | null; // 停车信息
-    payment: string[] | null; // 支付方式
-    payment_method: string[] | null; // 支付类型
-    service_model: string[] | null; // 服务方式
-    social: SocialItem[] | null; // 社交平台
+    parking: string[]; // 停车信息
+    payment: string[]; // 支付方式
+    payment_method: string[]; // 支付类型
+    service_model: string[] ; // 服务方式
+    social: SocialItem[] ; // 社交平台
     tell: string; // 联系电话
     store_name: string // 店铺名
     store_id: number // 店铺id

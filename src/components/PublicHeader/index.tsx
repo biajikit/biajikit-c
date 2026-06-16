@@ -63,7 +63,7 @@ export default function Index({}) {
                         <div className={`w-full ${menuState.loadingOver ? 'opacity-100' : 'opacity-0'}`}>
                             <div className="flex items-center justify-end flex-wrap" ref={menuDom}>
                                 <div className="font-[500] text-[16px] text-[rgba(51,51,51,1)] mr-[70px] flex-none">
-                                    大师大师大
+                                    {/*大师大师大*/}
                                 </div>
                             </div>
                         </div>}

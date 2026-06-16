@@ -60,7 +60,7 @@ export default function Index({}) {
                     <div
                         key={index}
                         onClick={() => scrollToIndex(index)}
-                        className={`relative h-[22px] flex justify-start items-center pl-[20px] font-[500] text-[16px] mb-[16px] cursor-pointer ${activeTitleIndex === index ? 'text-[rgba(51,51,51,1)]' : 'text-[rgba(153,153,153,1)]'}`}>
+                        className={`relative min-h-[22px] flex justify-start items-center pl-[20px] font-[500] text-[16px] mb-[16px] cursor-pointer ${activeTitleIndex === index ? 'text-[rgba(51,51,51,1)]' : 'text-[rgba(153,153,153,1)]'}`}>
                         {item.class_name}
                         {activeTitleIndex === index &&
                             <div className="h-full w-[2px] bg-[rgba(51,51,51,1)] absolute right-0 top-0"></div>}

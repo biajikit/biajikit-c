@@ -87,10 +87,10 @@ export default function Index({}) {
                      className="h-[240px] sm:h-[329px] w-full block"/>
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-1">
                     <div className="font-[500] text-[16px] text-[rgba(255,255,255,1)] mb-[10px] text-center">
-                        {shopConfig?.menu_name}
+                        {shopConfig?.menu_name ?? 'welcome'}
                     </div>
                     <div className="font-[400] text-[12px] text-[rgba(255,255,255,1)]">
-                        {shopConfig?.menu_description}
+                        {shopConfig?.menu_description ?? 'welcome'}
                     </div>
                 </div>
             </div>

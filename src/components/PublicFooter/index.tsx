@@ -128,10 +128,11 @@ export default function Index() {
                 </div>}
 
 
-            <div className="m-[50px_50px_0_50px] text-center font-[400] text-[14px] text-[rgba(102,102,102,1)]">
-                {t('footer.copyright', {year: shopConfig?.pub_time, storeName: shopConfig?.store_name})}
-            </div>
-
+            {(shopConfig?.pub_time || shopConfig?.store_name) &&
+                <div className="m-[50px_50px_0_50px] text-center font-[400] text-[14px] text-[rgba(102,102,102,1)]">
+                    {t('footer.copyright', {year: shopConfig?.pub_time, storeName: shopConfig?.store_name})}
+                </div>
+            }
             <div
                 className="m-[4px_50px_0_50px] text-center font-[400] text-[14px] text-[rgba(102,102,102,1)] flex items-center justify-center">
                 {t('footer.poweredBy', {

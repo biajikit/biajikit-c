@@ -17,7 +17,7 @@ function notifyListeners() {
 
 export function useShopConfig() {
     const [, forceUpdate] = useState({});
-    const {lang} = useLanguage();
+    const {lang,setLang} = useLanguage();
 
     // 订阅组件刷新
     useEffect(() => {
@@ -55,23 +55,25 @@ export function useShopConfig() {
                     languageKey.show = result.lang_config.includes(languageKey.key)
                 });
 
-                if (!getStorage('lang')) {
-                    let locale = 'EN';
-                    const localeFind = languageKeyList.find(
-                        (language) =>
-                            language.key.toLowerCase() === navigator.language.toLowerCase() &&
-                            result.lang_config.includes(language.key)
-                    );
-                    if (localeFind) locale = localeFind.key;
-                    else if (result.first_lang) locale = result.first_lang;
-
-                    const {setLang} = useLanguage();
-                    setLang(locale);
+                let locale: string = getStorage('lang') || '';
+                if (locale) {
+                    let data: any = languageKeyList.find(item => item.key.toLowerCase() === locale.toLowerCase() && item.show)
+                    locale = data?.key
                 }
+                if (!locale && result.first_lang) {
+                    let data: any = languageKeyList.find(item => item.key.toLowerCase() === result.first_lang.toLowerCase() && item.show)
+                    locale = data?.key
+                }
+                if (!locale && navigator.language) {
+                    let data: any = languageKeyList.find(item => item.key.toLowerCase() === navigator.language.toLowerCase() && item.show)
+                    locale = data?.key
+                }
+                locale = locale || 'EN'
+                setLang(locale);
 
                 notifyListeners();
             } catch (err) {
-                console.error('获取店铺配置失败', err);
+                // console.error('获取店铺配置失败', err);
             } finally {
                 fetchPromise = null;
             }

@@ -209,14 +209,14 @@ export default function Index({}) {
                                             {historyList[detailActive].table_no}
                                         </div>
                                     </div>
-                                    <div className="flex items-center justify-between mb-[5px] sm:mb-[8px]">
-                                        <div className="font-[500] text-[14px] text-[rgba(153,153,153,1)]">
-                                            {t('order.total')}
-                                        </div>
-                                        <div className="font-[500] text-[14px] text-[rgba(51,51,51,1)]">
-                                            {shopConfig.currency}{historyList[detailActive].total_minor}
-                                        </div>
-                                    </div>
+                                    {/*<div className="flex items-center justify-between mb-[5px] sm:mb-[8px]">*/}
+                                    {/*    <div className="font-[500] text-[14px] text-[rgba(153,153,153,1)]">*/}
+                                    {/*        {t('order.total')}*/}
+                                    {/*    </div>*/}
+                                    {/*    <div className="font-[500] text-[14px] text-[rgba(51,51,51,1)]">*/}
+                                    {/*        {shopConfig.currency}{historyList[detailActive].total_minor}*/}
+                                    {/*    </div>*/}
+                                    {/*</div>*/}
                                     <div className="flex items-center justify-between">
                                         <div className="font-[500] text-[14px] text-[rgba(153,153,153,1)]">
                                             {t('order.placedAt')}
@@ -357,32 +357,43 @@ export default function Index({}) {
                                                }))}
                                                maxLength={50}
                                                disabled={['detail', 'orderDetail'].includes(cartStatus)}
-                                               className="mt-[10px] h-[46px] bg-[rgba(247,247,247,1)] rounded-[8px] p-[0_16px]"
+                                               className={`mt-[10px] h-[46px] bg-[rgba(247,247,247,1)] rounded-[8px] p-[0_16px] ${(['detail', 'orderDetail'].includes(cartStatus)
+                                                   ? historyList[detailActive]?.table_no.length
+                                                   : userWrite.table_no.length) ? '' : 'border border-[rgba(255,58,48,1)]'}`}
                                                placeholder={String(t('cart.tableNumber') ?? '')}/>
                                     </div>
                                     <div className="mt-[26px]">
                                         <div className="flex items-start justify-start">
                                             {t('cart.note')}
                                         </div>
-                                        <input type="text"
-                                               value={['detail', 'orderDetail'].includes(cartStatus)
-                                                   ? historyList[detailActive]?.customer_note
-                                                   : userWrite.customer_note}
-                                               onChange={(e) => setUserWrite(prev => ({
-                                                   ...prev,
-                                                   customer_note: e.target.value
-                                               }))}
-                                               maxLength={50}
-                                               disabled={['detail', 'orderDetail'].includes(cartStatus)}
-                                               className="mt-[10px] h-[46px] bg-[rgba(247,247,247,1)] rounded-[8px] p-[0_16px]"
-                                               placeholder={String(t('cart.specialRequests') ?? '')}/>
+                                        {!['detail', 'orderDetail'].includes(cartStatus) ?
+                                            <input type="text"
+                                                   value={['detail', 'orderDetail'].includes(cartStatus)
+                                                       ? historyList[detailActive]?.customer_note
+                                                       : userWrite.customer_note}
+                                                   onChange={(e) => setUserWrite(prev => ({
+                                                       ...prev,
+                                                       customer_note: e.target.value
+                                                   }))}
+                                                   maxLength={50}
+                                                   disabled={['detail', 'orderDetail'].includes(cartStatus)}
+                                                   className="mt-[10px] h-[46px] bg-[rgba(247,247,247,1)] rounded-[8px] p-[0_16px]"
+                                                   placeholder={String(t('cart.specialRequests') ?? '')}/>
+                                            :
+                                        <div  className="mt-[10px] h-[46px] bg-[rgba(247,247,247,1)] rounded-[8px] p-[0_16px]">
+                                            {['detail', 'orderDetail'].includes(cartStatus)
+                                                ? historyList[detailActive]?.customer_note
+                                                : userWrite.customer_note}
+                                        </div>}
+
                                     </div>
                                 </div>}
                         </div>
 
                         {/*无数据状态*/}
                         {totalCartNum <= 0 && cartStatus === '' &&
-                            <div className="p-[80px_20px] md:p-[180px_20px] text-center">
+                            <div
+                                className={`${historyList.length ? 'p-[0_20px] md:p-[0_20px]' : 'p-[80px_20px] md:p-[180px_20px]'} text-center`}>
                                 <Img src={`shopCartNoData.png`}
                                      alt='noData'
                                      className="w-[180px] h-[180px] inline-block"
@@ -409,14 +420,15 @@ export default function Index({}) {
                                             {shopConfig?.currency} {['detail', 'orderDetail'].includes(cartStatus) ? historyList[detailActive].subtotal_minor : oldTotalCartPrice}
                                         </div>
                                     </div>
-                                    <div className="flex items-center justify-between mb-[12px]">
-                                        <div className="font-[400] text-[14px] text-[rgba(153,153,153,1)]">
-                                            {t('cart.discount')}
-                                        </div>
-                                        <div className="font-[400] text-[14px] text-[rgba(153,153,153,1)]">
-                                            {discount > 0 && '-'} {shopConfig?.currency}{discount}
-                                        </div>
-                                    </div>
+                                    {discount > 0 &&
+                                        <div className="flex items-center justify-between mb-[12px]">
+                                            <div className="font-[400] text-[14px] text-[rgba(153,153,153,1)]">
+                                                {t('cart.discount')}
+                                            </div>
+                                            <div className="font-[400] text-[14px] text-[rgba(153,153,153,1)]">
+                                                {discount > 0 && '-'} {shopConfig?.currency}{discount}
+                                            </div>
+                                        </div>}
                                     <div className="flex items-center justify-between">
                                         <div className="font-[500] text-[16px] text-[rgba(51,51,51,1)]">
                                             {t('cart.total')}

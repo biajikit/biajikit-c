@@ -50,7 +50,7 @@ export default function Index({}) {
             {/*头部*/}
             <div
                 className="h-[56px] flex justify-between items-center p-[0_16px] fixed left-0 top-0 z-10 w-full bg-[rgba(255,255,255,1)]">
-                <Img src={shopConfig?.logo_img||`nodata-banner.png`} alt=""
+                <Img src={shopConfig?.logo_img||`biajikitlogo.png`} alt=""
                      className="h-[36px] flex-none mr-[16px]"/>
                 <div className="flex items-center justify-end w-full">
                     {/*导航菜单*/}

@@ -64,7 +64,7 @@ export default function Index() {
                                         {/* 图片容器 */}
                                         <div className="w-full h-[135px] sm:h-[150px] relative">
                                             <Img
-                                                src={goods.primary_image_url}
+                                                src={goods.primary_image_url||`nodata-goods.png`}
                                                 className="w-full h-full object-cover rounded-[14px]"
                                                 alt=""
                                             />

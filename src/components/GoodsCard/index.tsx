@@ -56,7 +56,7 @@ export default function Index() {
                                         </div>
                                     </div>
                                     <div className="flex-none h-[114px] sm:h-[128px] w-[114px] sm:w-[128px] relative">
-                                        <Img src={goods.primary_image_url}
+                                        <Img src={goods.primary_image_url||`nodata-goods.png`}
                                              className="w-full h-full object-cover rounded-[10px]" alt=""/>
                                         {goods.calories > 0 &&
                                             <div

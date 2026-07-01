@@ -50,7 +50,7 @@ export default function Index({}) {
             {/*头部*/}
             <div
                 className="h-[56px] flex justify-between items-center p-[0_16px] fixed left-0 top-0 z-10 w-full bg-[rgba(255,255,255,1)]">
-                <Img src={shopConfig?.logo_img} alt=""
+                <Img src={shopConfig?.logo_img||`nodata-banner.png`} alt=""
                      className="h-[36px] flex-none mr-[16px]"/>
                 <div className="flex items-center justify-end w-full">
                     {/*导航菜单*/}
@@ -83,7 +83,7 @@ export default function Index({}) {
 
             {/*店铺信息*/}
             <div className="relative">
-                <Img src={shopConfig?.banner_img} alt=""
+                <Img src={shopConfig?.banner_img||`nodata-banner.png`} alt=""
                      className="h-[240px] sm:h-[329px] w-full block"/>
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-1">
                     <div className="font-[500] text-[16px] text-[rgba(255,255,255,1)] mb-[10px] text-center">

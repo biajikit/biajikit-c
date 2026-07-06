@@ -65,7 +65,7 @@ export default function Index() {
                                             </div>
                                         }
                                         <div
-                                            className="absolute z-1 right-[8px] bottom-[6px] flex items-center justify-between bg-white/60 backdrop-blur-[3px]">
+                                            className="absolute z-1 right-[8px] bottom-[6px] flex items-center justify-between backdrop-blur-[3px]">
                                             {/*减*/}
                                             {goods.cart_num > 0 &&
                                                 <div

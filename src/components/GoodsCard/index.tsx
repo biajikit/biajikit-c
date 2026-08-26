@@ -55,9 +55,9 @@ export default function Index() {
                                                 </div>}
                                         </div>
                                     </div>
-                                    <div className="flex-none h-[114px] sm:h-[128px] w-[114px] sm:w-[128px] relative">
+                                    <div className="flex-none h-[114px] sm:h-[128px] w-[114px] sm:w-[128px] relative flex items-center justify-center">
                                         <Img src={goods.primary_image_url||`nodata-goods.png`}
-                                             className="w-full h-full object-cover rounded-[10px]" alt=""/>
+                                             className="w-[52px]] h-[52px] object-cover rounded-[10px]" alt=""/>
                                         {goods.calories > 0 &&
                                             <div
                                                 className="z-1 absolute left-0 top-0 flex items-center justify-center bg-[rgba(51_51_51)]/40 h-[22px] p-[0_8px] rounded-[10px_0_10px_0] font-[500] text-[rgb(255_255_255)]">
@@ -65,7 +65,7 @@ export default function Index() {
                                             </div>
                                         }
                                         <div
-                                            className="absolute z-1 right-[8px] bottom-[6px] flex items-center justify-between backdrop-blur-[3px]">
+                                            className="absolute z-1 right-[8px] bottom-[6px] flex items-center justify-between backdrop-blur-[4px] bg-white/60 h-[38px] rounded-[19px] p-[0_3px]">
                                             {/*减*/}
                                             {goods.cart_num > 0 &&
                                                 <div

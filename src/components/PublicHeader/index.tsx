@@ -82,9 +82,10 @@ export default function Index({}) {
             </div>
 
             {/*店铺信息*/}
-            <div className="relative">
+            <div className="relative flex items-center justify-center">
                 <Img src={shopConfig?.banner_img||`nodata-banner.png`} alt=""
-                     className="h-[240px] sm:h-[329px] w-full block"/>
+                     className="h-[240px] sm:h-[329px] max-w-[760px] sm:max-w-[1044px] w-full block"/>
+                <div className="absolute left-0 top-0 w-full h-full bg-[rgba(0,0,0,.4)] z-0"></div>
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-1">
                     <div className="font-[500] text-[16px] text-[rgba(255,255,255,1)] mb-[10px] text-center">
                         {shopConfig?.menu_name ?? 'welcome'}

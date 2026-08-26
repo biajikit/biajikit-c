@@ -62,10 +62,10 @@ export default function Index() {
                                          className="flex-shrink-0 w-[135px] sm:w-[150px] mr-[12px] relative pb-[34px] first:ml-[20px] last:mr-[20px]">
 
                                         {/* 图片容器 */}
-                                        <div className="w-full h-[135px] sm:h-[150px] relative">
+                                        <div className="w-full h-[135px] sm:h-[150px] relative flex items-center justify-center">
                                             <Img
                                                 src={goods.primary_image_url||`nodata-goods.png`}
-                                                className="w-full h-full object-cover rounded-[14px]"
+                                                className="w-[52px]] h-[52px] object-cover rounded-[14px]"
                                                 alt=""
                                             />
 
@@ -79,7 +79,7 @@ export default function Index() {
 
                                             {/* 按钮组 */}
                                             <div
-                                                className="absolute z-1 right-[8px] bottom-[8px] flex items-center justify-between backdrop-blur-[3px]">
+                                                className="absolute z-1 right-[8px] bottom-[8px] flex items-center justify-between backdrop-blur-[4px] bg-white/60 h-[38px] rounded-[19px] p-[0_3px]">
                                                 {/* 减号 */}
                                                 {goods.cart_num > 0 &&
                                                     <div

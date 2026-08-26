@@ -110,16 +110,16 @@ export function useScrollTrigger() {
 
         const container = scrollContainerRef.current;
         if (container) {
-            container.addEventListener('scroll', (e) => {
+            container.addEventListener('scroll', () => {
                 if (!targetElement || isScrollingLock) return;
 
                 const container = scrollContainer;
                 const largeScreen = isLargeScreen();
-                const isContainerScroll = e.target === container;
+                // const isContainerScroll = e.target === container;
 
-                if (largeScreen && isContainerScroll && window.scrollY !== 0) {
-                    window.scrollTo({top: 0, behavior: 'instant'});
-                }
+                // if (largeScreen && isContainerScroll && window.scrollY !== 0) {
+                //     window.scrollTo({top: 0, behavior: 'instant'});
+                // }
 
                 const viewportHeight = largeScreen && container
                     ? container.clientHeight
